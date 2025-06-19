@@ -1,15 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+const { defineConfig } = require("vite");
+const react = require("@vitejs/plugin-react");
+const path = require("path");
 
-export default defineConfig({
+module.exports = defineConfig({
   plugins: [
     react(),
-    // Only include Replit plugins if running in Replit
-    ...(process.env.REPL_ID ? [
-      require("@replit/vite-plugin-runtime-error-modal")(),
-      require("@replit/vite-plugin-cartographer").cartographer(),
-    ] : []),
+    ...(process.env.REPL_ID
+      ? [
+          require("@replit/vite-plugin-runtime-error-modal")(),
+          require("@replit/vite-plugin-cartographer").cartographer(),
+        ]
+      : []),
   ],
   resolve: {
     alias: {
